@@ -4,6 +4,11 @@
 This project analyzes the Maven Movies DVD rental database using SQL to explore store operations, inventory composition, customer behavior, and catalog coverage.
 The goal of the analysis is to demonstrate how SQL can be used to extract meaningful business insights from relational databases.
 
+## Business Problem
+
+Data Sphere is a DVD rental company seeking to better understand its operational performance, inventory composition, and customer behavior.
+Management wants to evaluate store operations, assess inventory risk exposure, identify high-value customers, and determine how well the film catalog represents award-winning actors. This analysis uses SQL to extract insights from the relational database and provide data-driven perspectives on these business questions.
+
 ## Project Structure
 
 This repository contains the SQL analysis of the Data phere dataset including business questions, analytical queries, and insights derived from the data.
