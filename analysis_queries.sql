@@ -64,12 +64,46 @@ join city
 on address.city_id = city.city_id
 join country
 on city.country_id = country.country_id
-6. Customer Value Ranking
-Determine customer lifetime value by calculating total rentals and total payments made by each customer, ranked from highest to lowest spending customers.
+	
+-- 6. Customer Value Ranking
+-- Determine customer lifetime value by calculating total rentals and total payments made by each customer, ranked from highest to lowest spending customers.
+select customer.first_name, customer.last_name, customer.customer_id,
+sum(inventory_id) as total_rentals,
+sum(amount) as total_payment
+from rental
+join customer
+on rental.customer_id = customer.customer_id
+join payment
+on payment.rental_id = rental.rental_id
+group by customer.first_name, customer.last_name, customer.customer_id
+order by sum(inventory_id), sum(amount) desc
 ________________________________________
-7. Organizational Stakeholder Directory
-Compile a consolidated dataset listing both advisors and investors, identifying their roles and associated companies where applicable.
-________________________________________
-8. Award-Winning Actor Coverage
-Measure the representation of award-winning actors in the film catalog, calculating the percentage coverage for actors with one, two, and three award types.
+-- 7. Organizational Stakeholder Directory
+-- Compile a consolidated dataset listing both advisors and investors, identifying their roles and associated companies where applicable.
+Select 'Investor' as type,
+first_name, last_name, company_name
+from investor
 
+union
+
+select 'Advisor' as type,
+first_name, last_name, null
+from advisor
+________________________________________
+-- 8. Award-Winning Actor Coverage
+-- Measure the representation of award-winning actors in the film catalog, calculating the percentage coverage for actors with one, two, and three award types.
+SELECT
+	CASE 
+		WHEN actor_award.awards = 'Emmy, Oscar, Tony ' THEN '3 awards'
+        WHEN actor_award.awards IN ('Emmy, Oscar','Emmy, Tony', 'Oscar, Tony') THEN '2 awards'
+		ELSE '1 award'
+	END AS number_of_awards, 
+    AVG(CASE WHEN actor_award.actor_id IS NULL THEN 0 ELSE 1 END) AS pct_w_one_film
+	
+from actor_award
+	group by
+	case 
+		WHEN actor_award.awards = 'Emmy, Oscar, Tony ' THEN '3 awards'
+        WHEN actor_award.awards IN ('Emmy, Oscar','Emmy, Tony', 'Oscar, Tony') THEN '2 awards'
+		ELSE '1 award'
+	end
