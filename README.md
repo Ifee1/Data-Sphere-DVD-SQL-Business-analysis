@@ -4,6 +4,10 @@
 This project analyzes the Maven Movies DVD rental database using SQL to explore store operations, inventory composition, customer behavior, and catalog coverage.
 The goal of the analysis is to demonstrate how SQL can be used to extract meaningful business insights from relational databases.
 
+## Project Structure
+
+This repository contains the SQL analysis of the Data phere dataset including business questions, analytical queries, and insights derived from the data.
+
 ## Dataset
 The dataset represents the operations of a fictional DVD rental company and includes information on:
 
